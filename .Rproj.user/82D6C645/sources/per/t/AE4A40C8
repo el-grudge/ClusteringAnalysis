@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589811175532.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3896886978",
+    "id" : "AE4A40C8",
+    "lastKnownWriteTime" : 1589810390,
+    "last_content_update" : 1589810390,
+    "path" : "~/R/Projects/STA6704_DATA_MINING_II/ASSIGNMENT_1/R/getshots.R",
+    "project_path" : "R/getshots.R",
+    "properties" : {
+        "cursorPosition" : "67,0",
+        "scrollLine" : "45",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

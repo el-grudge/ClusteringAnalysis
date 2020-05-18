@@ -31,7 +31,7 @@ plotHClust <- function(v_dist, v_hclust, listClust){
     plot(
       x = listClust[[j]][[k]],
       labels = FALSE,
-      axes = FALSE,
+      axes = TRUE,
       main=''
     )
     title(main=paste(j,k,coef(listClust[[j]][[k]]), sep=' '), line=-0.7)
@@ -61,6 +61,7 @@ plotOutlierClust <- function(M_coef){
   plot(
     x = list_hclust[[outlier_algo]][[outlier_dist]],
     labels = FALSE,
+    axes=TRUE,
     sub = "",
     main=""
   )
@@ -74,6 +75,7 @@ plotEvenClust <- function(M_coef){
   plot(
     x = list_hclust[[even_algo]][[even_dist]],
     labels = FALSE,
+    axes=TRUE,
     sub = "",
     main=""
   )

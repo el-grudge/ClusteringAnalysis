@@ -7,7 +7,6 @@ source('R/libraries.R')
 # 2- get shots
 #source('R/getshots.R')
 
-
 # CLUSTERING
 source('R/utils.R')
 # A- PARTITIONING

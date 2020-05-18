@@ -11,7 +11,7 @@ bundesliga19_shots_M <- data.frame(bundesliga19_shots_M, stringsAsFactors = FALS
 # verify
 View(bundesliga19_shots_M)
 length(unique(bundesliga19_shots_M$match_id))
-write.csv(bundesliga19_shots_M, file='bundesliga19_shots_M.csv')
+write.csv(bundesliga19_shots_M, file='bundesliga19_shots_M.csv', row.names = FALSE)
 
 # Dataframe construction
 # final dataframe will have the following shape: team_name, "a list of shot attributes"
@@ -21,7 +21,6 @@ write.csv(bundesliga19_shots_M, file='bundesliga19_shots_M.csv')
 # xG per 90 = avg(xGpermatch)
 # avg shot dist = avg(avgshotdistancepermatch) * shot dist needs to be calculated first using X, Y coord
 # situations (groupby) = avg(count per situation type)
-# last action (groupby) = avg(count per last action type) 
 
 # create new column 'team', which corresponds to h_team when h and a_team when a
 bundesliga19_shots_M <- read.csv('data/bundesliga19_shots_M.csv', stringsAsFactors = FALSE)
@@ -65,4 +64,4 @@ playerShotProfiles19_M <- data.frame(bundesliga19_shots_M %>%
                                        ) %>%
                                        arrange(desc(totalGoalsScored)))
 
-write.csv(playerShotProfiles19_M, file='data/playerShotProfiles19_M.csv')
+write.csv(playerShotProfiles19_M, file='data/playerShotProfiles19_M.csv', row.names = FALSE)

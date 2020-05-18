@@ -67,3 +67,16 @@ for(j in v_dist) list_diana[[j]] <- diana(
 # )
 # list_mona <- mona(binary_M)
 # #coef(list_mona)
+
+
+cutree_M <- cutree(
+  tree = list_hclust[['canberra']][['single']],
+  k = 200
+)
+
+silhouette_M <- silhouette(
+  x = cutree_M,
+  dist = list_dist$canberra
+)
+plot(silhouette_M)
+

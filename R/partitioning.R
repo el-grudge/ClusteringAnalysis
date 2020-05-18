@@ -1,5 +1,5 @@
 # read data
-playerShotProfiles19_M <- read.csv('data/playerShotProfiles19_M.csv')
+playerShotProfiles19_M <- read.csv('data/playerShotProfiles19_M.csv', stringsAsFactors = FALSE)
 
 # create clustering dataset
 M <- playerShotProfiles19_M %>%
@@ -17,14 +17,14 @@ partition_algo <- c('kmeans', 'clara', 'fanny', 'pam')
 plotOptimalK(partition_algo, 'wss', M)
 
 # silhoutte
-partition_algo <- c('kmeans', 'clara', 'pam')
+#partition_algo <- c('kmeans', 'clara', 'pam')
 plotOptimalK(partition_algo, 'silhouette', M)
 
 # gap statistic
 plotOptimalK(partition_algo, 'gap_stat', M)
 
 # partition according to best n
-kList <- c(2,3,4)
+kList <- c(2,3,4,7)
 partitionings <- c()
 
 for (i in c(1:length(kList))){
@@ -40,7 +40,7 @@ for (i in c(1:length(kList))){
 
 # clusplot analysis
 # 1- clusplot
-par(mfrow=c(1, 3))
+par(mfrow=c(2, 2))
 for (i in c(1:length(partitionings))){
   for (j in c(1:length(partitionings[[i]]))){
     clusplot(
@@ -49,13 +49,14 @@ for (i in c(1:length(partitionings))){
       partitionings[[i]][[j]]$clustering,
       color=TRUE,
       shade=TRUE,
-      lines=0
+      lines=0,
+      cex=0
     )
   }
 }
 
 # 2- plotcluster
-par(mfrow=c(1, 3))
+par(mfrow=c(2, 2))
 for (i in c(1:length(partitionings))){
   for (j in c(1:length(partitionings[[i]]))){
     plotcluster(
