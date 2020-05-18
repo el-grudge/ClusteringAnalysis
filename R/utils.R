@@ -60,6 +60,7 @@ plotOutlierClust <- function(M_coef){
   par(mfrow=c(1,1))
   plot(
     x = list_hclust[[outlier_algo]][[outlier_dist]],
+    labels = FALSE,
     sub = "",
     main=""
   )
@@ -72,6 +73,7 @@ plotEvenClust <- function(M_coef){
   par(mfrow=c(1,1))
   plot(
     x = list_hclust[[even_algo]][[even_dist]],
+    labels = FALSE,
     sub = "",
     main=""
   )
