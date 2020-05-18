@@ -1,0 +1,18 @@
+for(j in v_dist) for(k in v_hclust) list_agnes[[j]][[k]]$height <- rank(list_agnes[[j]][[k]]$height)
+par(
+  mfrow = c(length(v_dist),length(v_hclust)),
+  mar = c(0,0,0,0),
+  mai = c(0,0,0,0),
+  oma = c(0,0,0,0)
+)
+
+for(j in v_dist) for(k in v_hclust) plot(
+  x = list_agnes[[j]][[k]],
+  labels = FALSE,
+  axes = FALSE,
+  main = paste("\n",j,"\n",k)
+)
+
+coef.hclust(list_agnes[[j]][[k]])
+
+is.unsorted()

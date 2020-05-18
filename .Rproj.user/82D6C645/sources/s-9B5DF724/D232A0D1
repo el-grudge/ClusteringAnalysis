@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589748110535.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1380639223",
+    "id" : "D232A0D1",
+    "lastKnownWriteTime" : 1589764922,
+    "last_content_update" : 1589764922281,
+    "path" : "~/R/Projects/STA6704_DATA_MINING_II/ASSIGNMENT_1/R/libraries.R",
+    "project_path" : "R/libraries.R",
+    "properties" : {
+        "cursorPosition" : "2,1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

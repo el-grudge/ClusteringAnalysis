@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589765629502.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6426E05E",
+    "lastKnownWriteTime" : 1589765205,
+    "last_content_update" : 1589765629502,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "201645E2",
+        "caption" : "playerShotProfiles19_M",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=playerShotProfiles19_M&cache_key=201645E2",
+        "displayedObservations" : 378,
+        "environment" : "",
+        "expression" : "playerShotProfiles19_M",
+        "object" : "playerShotProfiles19_M",
+        "preview" : 0,
+        "totalObservations" : 378,
+        "variables" : 14
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
