@@ -1,5 +1,3 @@
-library(understatr) # > main
-
 # get_match_id function, with tryCatch wrapper to handle http:404 errors
 get_match_ids <- function(x) {
   tryCatch(return (unique(dplyr::select(get_match_shots(match_id = x), match_id, h_team, a_team))),
@@ -13,6 +11,7 @@ for (i in c(1:20000)){
 }
 
 # add league_name & season to match_ids
+
 # A- Add league name
 # 1- loop over leageus_meta
 # 2- get all get_league_teams_stats
@@ -67,5 +66,3 @@ match_ids$season <- vapply(
 
 # save for-loop results
 write.csv(match_ids, file='match_ids.csv')
-
-

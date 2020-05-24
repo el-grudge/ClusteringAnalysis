@@ -1,14 +1,33 @@
 # read data
-playerShotProfiles19_M <- read.csv('data/playerShotProfiles19_M.csv', stringsAsFactors = FALSE)
+playerShotProfiles19_2M <- retrieveShots('Bundesliga', 2019)
 
+# set seed
+set.seed(823)
+
+# elbowplts
+plotOptimalK <- function(algoList, plotMethod, M){
+  diagnosticPlots <- c()
+  diagnosticPlots <- lapply(
+    X = algoList,
+    FUN = function(algo) fviz_nbclust(
+      x = M,
+      FUNcluster = get(algo),
+      method = plotMethod,
+      verbose = F
+    ) + 
+      labs(title=algo)
+  )
+  n <- length(diagnosticPlots)
+  nCol <- floor(sqrt(n))
+  return (do.call("grid.arrange", c(diagnosticPlots, ncol=nCol)))
+}
+
+# MAIN
 # create clustering dataset
 M <- playerShotProfiles19_M %>%
   select(-player, -penalty, -directFK, -totalGoalsScored)
 rownames(M) <- playerShotProfiles19_M$player
 M <- scale(M)
-
-# set seed
-set.seed(823)
 
 # find best k
 partition_algo <- c('kmeans', 'clara', 'fanny', 'pam')
@@ -51,7 +70,8 @@ for (i in c(1:length(partitionings))){
       shade=TRUE,
       lines=0,
       cex=0
-    )
+    ) + 
+      theme(plot.title = element_text(vjust=-2))
   }
 }
 
@@ -63,7 +83,8 @@ for (i in c(1:length(partitionings))){
       x = M,
       clvecd = partitionings[[i]][[j]]$clustering,
       main = partition_algo[j]
-    )
+    ) + 
+      theme(plot.title = element_text(vjust=-2))
   }
 }
 

@@ -1,83 +1,25 @@
-plotOptimalK <- function(algoList, plotMethod, M){
-  diagnosticPlots <- c()
-  diagnosticPlots <- lapply(
-    X = algoList,
-    FUN = function(algo) fviz_nbclust(
-      x = M,
-      FUNcluster = get(algo),
-      method = plotMethod,
-      verbose = F
-    ) + 
-      labs(title=algo)
-  )
-  n <- length(diagnosticPlots)
-  nCol <- floor(sqrt(n))
-  return (do.call("grid.arrange", c(diagnosticPlots, ncol=nCol)))
-}
-
-fixClustHeight <- function(v_dist, v_hclust, listClust){
-  for(j in v_dist) for(k in v_hclust) listClust[[j]][[k]]$height <- rank(listClust[[j]][[k]]$height)
-  return (listClust)
-}
-
-plotHClust <- function(v_dist, v_hclust, listClust){
-  par(
-    mfrow = c(length(v_dist),length(v_hclust)),
-    mar = c(0,0,0,0),
-    mai = c(0,0,0,0),
-    oma = c(0,0,0,0)
-  )
-  for(j in v_dist) for(k in v_hclust) {
-    plot(
-      x = listClust[[j]][[k]],
-      labels = FALSE,
-      axes = TRUE,
-      main=''
-    )
-    title(main=paste(j,k,coef(listClust[[j]][[k]]), sep=' '), line=-0.7)
-  }
-}
-
-getClustCoeffs <- function(v_dist, v_hclust, listClust) {
-  M_coef <- matrix(
-    data = NA,
-    nrow = length(v_dist),
-    ncol = length(v_hclust)
-  )
-  rownames(M_coef) <- v_dist
-  colnames(M_coef) <- v_hclust
-  for(j in v_dist) for(k in v_hclust) try({
-    M_coef[j,k] <- coef(
-      object = listClust[[j]][[k]]
-    )
-  })
-  return (M_coef)
-}
-
-plotOutlierClust <- function(M_coef){
-  outlier_algo <- rownames(M_coef)[which(M_coef == min(M_coef), arr.ind = TRUE)[1]]
-  outlier_dist <- colnames(M_coef)[which(M_coef == min(M_coef), arr.ind = TRUE)[2]]
-  par(mfrow=c(1,1))
-  plot(
-    x = list_hclust[[outlier_algo]][[outlier_dist]],
-    labels = FALSE,
-    axes=TRUE,
-    sub = "",
-    main=""
-  )
-  title(paste(outlier_algo, outlier_dist, min(M_coef), sep=' '), line=-1)
-}
-
-plotEvenClust <- function(M_coef){
-  even_algo <- rownames(M_coef)[which(M_coef == max(M_coef), arr.ind = TRUE)[1]]
-  even_dist <- colnames(M_coef)[which(M_coef == max(M_coef), arr.ind = TRUE)[2]]
-  par(mfrow=c(1,1))
-  plot(
-    x = list_hclust[[even_algo]][[even_dist]],
-    labels = FALSE,
-    axes=TRUE,
-    sub = "",
-    main=""
-  )
-  title(paste(even_algo, even_dist, max(M_coef), sep=' '), line=-1)
+# get shots for specific league and season
+retrieveShots <- function(leagueName, seasonYear){
+  return (matchShots[matchShots$match_id %in% matchIds[(matchIds$league_name==leagueName) & 
+                                                         (matchIds$year==seasonYear),'match_id'],] %>%
+            mutate(team=ifelse(h_a=='h', h_team, a_team),
+                   X=X*100,
+                   Y=Y*100,
+                   dist=sqrt(((X-100) * 1.05)^2 + ((Y-50) * 0.68)^2)) %>%
+            filter(result!='OwnGoal') %>%
+            group_by(player) %>%
+            summarise(matchCount=length(unique(match_id)),
+                      shotCount=n()/matchCount,
+                      goalsScored=n_distinct(id[result=='Goal']),
+                      xG=mean(sum(xG))/matchCount,
+                      avgShotDist=mean(dist),
+                      openPlay=n_distinct(id[situation=='OpenPlay'])/matchCount,
+                      setPiece=n_distinct(id[situation=='SetPiece'])/matchCount,
+                      penalty=n_distinct(id[situation=='Penalty'])/matchCount,
+                      fromCorner=n_distinct(id[situation=='FromCorner'])/matchCount,
+                      directFK=n_distinct(id[situation=='DirectFreekick'])/matchCount,
+                      rightFoot=n_distinct(id[shotType=='RightFoot'])/matchCount,
+                      leftFoot=n_distinct(id[shotType=='LeftFoot'])/matchCount,
+                      head=n_distinct(id[shotType=='Head'])/matchCount
+            ))
 }

@@ -80,3 +80,29 @@ silhouette_M <- silhouette(
 )
 plot(silhouette_M)
 
+
+
+###################################### URL #######################################
+
+urls$urlExists <- 
+  sapply(
+    1:length(urls[,1]), 
+    function(x) ifelse(GET(urls[x, 'urls'])[[1]] == urls[x,'urls'], 1, 0)
+  )
+
+
+url <- 'https://understat.com/match/'
+result <- try(read_html(paste(url,i,sep=''),trim=T), silent = TRUE)
+if (class(result) != 'try-error') list1 <- c(list1, i)
+
+i <- 81
+url <- 'https://understat.com/match/'
+
+GET(url)[[1]]
+
+library(httr)
+
+matchList <- sapply(
+  1:20000,
+  function(x) ifelse(!httr::http_error(paste(url,x,sep='')),x,NA)
+)
